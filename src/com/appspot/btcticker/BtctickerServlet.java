@@ -31,7 +31,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 @SuppressWarnings("serial")
 public class BtctickerServlet extends HttpServlet {
 
-	private static final long BG_COLOR = 0xFFE5E5E5L;
+	private static final long BG_COLOR = 0x80E5E5E5L;
 	private static final int MAX_W = 200;
 	private static final int H = 20;
 
@@ -253,16 +253,16 @@ public class BtctickerServlet extends HttpServlet {
 			else {
 				dd = digits[ch - '0'];
 			}
-			composites.add(ImagesServiceFactory.makeComposite(dd, offset, 1, 0.8f, Anchor.TOP_LEFT));
+			composites.add(ImagesServiceFactory.makeComposite(dd, offset, 1, 0.75f, Anchor.TOP_LEFT));
 			offset = offset + dd.getWidth();
 		}
 
 		Image bitcoin = currencies[Currency.BITCOIN.ordinal()];
 		if (symbol == bitcoin) {
-			composites.add(ImagesServiceFactory.makeComposite(symbol, 0, 0, 0.8f, Anchor.TOP_LEFT));
+			composites.add(ImagesServiceFactory.makeComposite(symbol, 0, 0, 0.75f, Anchor.TOP_LEFT));
 		}
 		else {
-			composites.add(ImagesServiceFactory.makeComposite(symbol, 1, 1, 0.8f, Anchor.TOP_LEFT));
+			composites.add(ImagesServiceFactory.makeComposite(symbol, 1, 1, 0.75f, Anchor.TOP_LEFT));
 		}
 
 		Image composite = imagesService.composite(composites, MAX_W, H, BG_COLOR);
