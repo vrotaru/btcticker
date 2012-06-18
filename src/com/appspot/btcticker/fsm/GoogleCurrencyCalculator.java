@@ -1,7 +1,7 @@
 
 // line 1 "GoogleCurrencyCalculator.ragel"
 // Generated using:
-// ragel -J -o src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java GoogleCurrencyCalculator.ragel
+// ragel -J -o src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java GoogleCurrencyCalculator.ragel
 //
 package com.appspot.btcticker.fsm;
 
@@ -11,7 +11,7 @@ public class GoogleCurrencyCalculator {
 	public static final String POUND_URL = "http://www.google.com/ig/calculator?hl=en&q=1USD=?GBP";
 
 
-// line 15 "src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java"
+// line 15 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 private static byte[] init__currency_converter_actions_0()
 {
 	return new byte [] {
@@ -157,14 +157,14 @@ static final int currency_converter_en_main = 1;
         double scale = 1.0;
         
         
-// line 161 "src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java"
+// line 161 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 	{
 	cs = currency_converter_start;
 	}
 
 // line 51 "GoogleCurrencyCalculator.ragel"
         
-// line 168 "src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java"
+// line 168 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -256,7 +256,7 @@ case 1:
 // line 17 "GoogleCurrencyCalculator.ragel"
 	{ scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
 	break;
-// line 260 "src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java"
+// line 260 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 			}
 		}
 	}

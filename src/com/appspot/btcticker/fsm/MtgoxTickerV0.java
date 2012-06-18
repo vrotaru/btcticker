@@ -1,7 +1,7 @@
 
-// line 1 "TickerV0.ragel"
+// line 1 "MtgoxTickerV0.ragel"
 // Generated using:
-// ragel -J -o src/com/appspot/btcticker/utils/TickerV0.java TickerV0.ragel
+// ragel -J -o src/com/appspot/btcticker/fsm/MtgoxTickerV0.java MtgoxTickerV0.ragel
 //
 package com.appspot.btcticker.fsm;
 
@@ -10,7 +10,7 @@ public class MtgoxTickerV0 {
 	public static final String URL_V0 = "https://mtgox.com/api/0/data/ticker.php";
 
 
-// line 14 "src/com/appspot/btcticker/utils/TickerV0.java"
+// line 14 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 private static byte[] init__ticker_actions_0()
 {
 	return new byte [] {
@@ -134,11 +134,11 @@ static final int ticker_error = 0;
 static final int ticker_en_main = 1;
 
 
-// line 13 "TickerV0.ragel"
+// line 13 "MtgoxTickerV0.ragel"
 
 
 
-// line 43 "TickerV0.ragel"
+// line 43 "MtgoxTickerV0.ragel"
 
 
     public double weightedValue(String json) {
@@ -163,14 +163,14 @@ static final int ticker_en_main = 1;
         double sellValue = 0.0;
 
         
-// line 167 "src/com/appspot/btcticker/utils/TickerV0.java"
+// line 167 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 	{
 	cs = ticker_start;
 	}
 
-// line 67 "TickerV0.ragel"
+// line 67 "MtgoxTickerV0.ragel"
         
-// line 174 "src/com/appspot/btcticker/utils/TickerV0.java"
+// line 174 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -251,36 +251,36 @@ case 1:
 			switch ( _ticker_actions[_acts++] )
 			{
 	case 0:
-// line 18 "TickerV0.ragel"
+// line 18 "MtgoxTickerV0.ragel"
 	{ mark = p; }
 	break;
 	case 1:
-// line 19 "TickerV0.ragel"
+// line 19 "MtgoxTickerV0.ragel"
 	{
         attribute = json.substring(mark, p);
     }
 	break;
 	case 2:
-// line 23 "TickerV0.ragel"
+// line 23 "MtgoxTickerV0.ragel"
 	{ i = 0; f = 0.0; scale = 1.0; }
 	break;
 	case 3:
-// line 24 "TickerV0.ragel"
+// line 24 "MtgoxTickerV0.ragel"
 	{ i = i * 10 + (int)data[p] - zero; }
 	break;
 	case 4:
-// line 25 "TickerV0.ragel"
+// line 25 "MtgoxTickerV0.ragel"
 	{ scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
 	break;
 	case 5:
-// line 27 "TickerV0.ragel"
+// line 27 "MtgoxTickerV0.ragel"
 	{
         if      ("buy".equals(attribute))  { buyValue = i + f; }
         else if ("sell".equals(attribute)) { sellValue = i + f; }
         else if ("last".equals(attribute)) { lastValue = i + f; }
     }
 	break;
-// line 284 "src/com/appspot/btcticker/utils/TickerV0.java"
+// line 284 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 			}
 		}
 	}
@@ -300,7 +300,7 @@ case 5:
 	break; }
 	}
 
-// line 68 "TickerV0.ragel"
+// line 68 "MtgoxTickerV0.ragel"
 
         if (cs < ticker_first_final) {
             throw new RuntimeException("??? " + json);

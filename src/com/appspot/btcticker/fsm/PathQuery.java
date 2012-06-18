@@ -1,7 +1,7 @@
 
-// line 1 "TickerQuery.ragel"
+// line 1 "PathQuery.ragel"
 // Generated using:
-// ragel -J -o src/com/appspot/btcticker/utils/TickerQuery.java TickerQuery.ragel
+// ragel -J -o src/com/appspot/btcticker/fsm/PathQuery.java PathQuery.ragel
 //
 package com.appspot.btcticker.fsm;
 
@@ -14,7 +14,7 @@ public class PathQuery {
 	public double amount = -9;
 
 
-// line 16 "src/com/appspot/btcticker/utils/TickerQuery.java"
+// line 18 "src/com/appspot/btcticker/fsm/PathQuery.java"
 private static byte[] init__query_actions_0()
 {
 	return new byte [] {
@@ -30,9 +30,9 @@ private static final byte _query_actions[] = init__query_actions_0();
 private static byte[] init__query_key_offsets_0()
 {
 	return new byte [] {
-	    0,    0,    1,    3,    5,    6,    7,   10,   11,   12,   13,   14,
-	   15,   16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   32,
-	   38,   39,   39
+	    0,    0,    1,    3,    6,    7,    8,    9,   10,   11,   14,   15,
+	   16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,
+	   28,   29,   36,   43,   43,   45,   46
 	};
 }
 
@@ -42,10 +42,11 @@ private static final byte _query_key_offsets[] = init__query_key_offsets_0();
 private static char[] init__query_trans_keys_0()
 {
 	return new char [] {
-	   47,   48,   57,   48,   57,  116,   99,  101,  103,  117,  117,  114,
-	   98,  112,  115,  100,  117,  114,   98,  116,   99,   98,  112,  115,
-	  100,   46,   98,  101,  103,  117,   48,   57,   98,  101,  103,  117,
-	   48,   57,   50,   50,    0
+	   47,   48,   57,  112,   48,   57,  112,  110,  103,  116,   99,  101,
+	  103,  117,  117,  114,   98,  112,  115,  100,  117,  114,   98,  116,
+	   99,   98,  112,  115,  100,   46,   98,  101,  103,  117,   48,   57,
+	   46,   98,  101,  103,  117,   48,   57,   46,   50,   46,   46,   50,
+	    0
 	};
 }
 
@@ -55,9 +56,9 @@ private static final char _query_trans_keys[] = init__query_trans_keys_0();
 private static byte[] init__query_single_lengths_0()
 {
 	return new byte [] {
-	    0,    1,    0,    0,    1,    1,    3,    1,    1,    1,    1,    1,
-	    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    5,    4,
-	    1,    0,    1
+	    0,    1,    0,    1,    1,    1,    1,    1,    1,    3,    1,    1,
+	    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+	    1,    5,    5,    0,    2,    1,    2
 	};
 }
 
@@ -68,8 +69,8 @@ private static byte[] init__query_range_lengths_0()
 {
 	return new byte [] {
 	    0,    0,    1,    1,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,
-	    0,    0,    0
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    1,    1,    0,    0,    0,    0
 	};
 }
 
@@ -79,9 +80,9 @@ private static final byte _query_range_lengths[] = init__query_range_lengths_0()
 private static byte[] init__query_index_offsets_0()
 {
 	return new byte [] {
-	    0,    0,    2,    4,    6,    8,   10,   14,   16,   18,   20,   22,
-	   24,   26,   28,   30,   32,   34,   36,   38,   40,   42,   44,   51,
-	   57,   59,   60
+	    0,    0,    2,    4,    7,    9,   11,   13,   15,   17,   21,   23,
+	   25,   27,   29,   31,   33,   35,   37,   39,   41,   43,   45,   47,
+	   49,   51,   58,   65,   66,   69,   71
 	};
 }
 
@@ -91,12 +92,13 @@ private static final byte _query_index_offsets[] = init__query_index_offsets_0()
 private static byte[] init__query_indicies_0()
 {
 	return new byte [] {
-	    0,    1,    2,    1,    3,    1,    4,    1,    5,    1,    6,    7,
-	    8,    1,    9,    1,   10,    1,   11,    1,   10,    1,   12,    1,
-	   10,    1,   13,    1,   14,    1,   15,    1,   16,    1,   10,    1,
-	   17,    1,   14,    1,   18,    1,   14,    1,   19,   21,   22,   23,
-	   24,   20,    1,   21,   22,   23,   24,    3,    1,   25,    1,    1,
-	   26,    1,    0
+	    0,    1,    2,    1,    4,    3,    1,    4,    1,    5,    1,    6,
+	    1,    7,    1,    8,    1,    9,   10,   11,    1,   12,    1,   13,
+	    1,   14,    1,   13,    1,   15,    1,   13,    1,   16,    1,   17,
+	    1,   18,    1,   19,    1,   13,    1,   20,    1,   17,    1,   21,
+	    1,   17,    1,   22,   24,   25,   26,   27,   23,    1,   28,   24,
+	   25,   26,   27,    3,    1,    1,   29,   30,    1,   29,    1,   29,
+	   31,    1,    0
 	};
 }
 
@@ -106,9 +108,9 @@ private static final byte _query_indicies[] = init__query_indicies_0();
 private static byte[] init__query_trans_targs_0()
 {
 	return new byte [] {
-	    2,    0,   22,   23,    5,   24,    7,    9,   11,    8,   25,   10,
-	   12,   14,   26,   16,   17,   19,   21,    3,   22,    4,   13,   18,
-	   20,    6,   15
+	    2,    0,   25,   26,    5,    6,   27,    8,   28,   10,   12,   14,
+	   11,   29,   13,   15,   17,   30,   19,   20,   22,   24,    3,   25,
+	    7,   16,   21,   23,    4,    4,    9,   18
 	};
 }
 
@@ -118,9 +120,9 @@ private static final byte _query_trans_targs[] = init__query_trans_targs_0();
 private static byte[] init__query_trans_actions_0()
 {
 	return new byte [] {
-	    0,    0,   13,    3,    0,    0,    7,    9,    5,    0,    0,    0,
-	    0,    0,    0,    0,    0,    0,    0,    0,    1,   11,   19,   22,
-	   16,    0,    0
+	    0,    0,   13,    3,    0,    0,    0,    0,    0,    7,    9,    5,
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   11,    1,
+	   11,   19,   22,   16,   11,    0,    0,    0
 	};
 }
 
@@ -131,8 +133,8 @@ private static byte[] init__query_eof_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   11,   11,
-	    0,    0,    0
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,   11,   11,    0,    0,    0,    0
 	};
 }
 
@@ -140,13 +142,13 @@ private static final byte _query_eof_actions[] = init__query_eof_actions_0();
 
 
 static final int query_start = 1;
-static final int query_first_final = 22;
+static final int query_first_final = 25;
 static final int query_error = 0;
 
 static final int query_en_main = 1;
 
 
-// line 45 "TickerQuery.ragel"
+// line 48 "PathQuery.ragel"
 
 
 	public boolean parse(String urlPart) {
@@ -170,14 +172,14 @@ static final int query_en_main = 1;
 		amount = -1;
 		
 		
-// line 172 "src/com/appspot/btcticker/utils/TickerQuery.java"
+// line 176 "src/com/appspot/btcticker/fsm/PathQuery.java"
 	{
 	cs = query_start;
 	}
 
-// line 68 "TickerQuery.ragel"
+// line 71 "PathQuery.ragel"
 		
-// line 179 "src/com/appspot/btcticker/utils/TickerQuery.java"
+// line 183 "src/com/appspot/btcticker/fsm/PathQuery.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -258,46 +260,46 @@ case 1:
 			switch ( _query_actions[_acts++] )
 			{
 	case 0:
-// line 16 "TickerQuery.ragel"
+// line 18 "PathQuery.ragel"
 	{ i = 0; f = 0.0; scale = 1.0; }
 	break;
 	case 1:
-// line 17 "TickerQuery.ragel"
+// line 19 "PathQuery.ragel"
 	{ i = i * 10 + (int)data[p] - zero; }
 	break;
 	case 2:
-// line 18 "TickerQuery.ragel"
+// line 20 "PathQuery.ragel"
 	{ scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
 	break;
 	case 3:
-// line 25 "TickerQuery.ragel"
+// line 27 "PathQuery.ragel"
 	{ }
 	break;
 	case 4:
-// line 26 "TickerQuery.ragel"
+// line 28 "PathQuery.ragel"
 	{ to = Currency.EURO; }
 	break;
 	case 5:
-// line 27 "TickerQuery.ragel"
+// line 29 "PathQuery.ragel"
 	{ to = Currency.POUND; }
 	break;
 	case 6:
-// line 32 "TickerQuery.ragel"
+// line 34 "PathQuery.ragel"
 	{ from = Currency.DOLLAR; to = Currency.BITCOIN; }
 	break;
 	case 7:
-// line 35 "TickerQuery.ragel"
+// line 37 "PathQuery.ragel"
 	{ from = Currency.EURO; to = Currency.BITCOIN; }
 	break;
 	case 8:
-// line 38 "TickerQuery.ragel"
+// line 40 "PathQuery.ragel"
 	{ from = Currency.POUND; to = Currency.BITCOIN; }
 	break;
 	case 9:
-// line 42 "TickerQuery.ragel"
+// line 44 "PathQuery.ragel"
 	{ amount = i + f; }
 	break;
-// line 299 "src/com/appspot/btcticker/utils/TickerQuery.java"
+// line 303 "src/com/appspot/btcticker/fsm/PathQuery.java"
 			}
 		}
 	}
@@ -319,10 +321,10 @@ case 4:
 	while ( __nacts-- > 0 ) {
 		switch ( _query_actions[__acts++] ) {
 	case 9:
-// line 42 "TickerQuery.ragel"
+// line 44 "PathQuery.ragel"
 	{ amount = i + f; }
 	break;
-// line 324 "src/com/appspot/btcticker/utils/TickerQuery.java"
+// line 328 "src/com/appspot/btcticker/fsm/PathQuery.java"
 		}
 	}
 	}
@@ -332,7 +334,7 @@ case 5:
 	break; }
 	}
 
-// line 69 "TickerQuery.ragel"
+// line 72 "PathQuery.ragel"
 		
 		if (cs < query_first_final) {
 			return false;

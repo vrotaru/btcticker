@@ -1,9 +1,11 @@
 // Generated using:
-// ragel -J -o src/com/appspot/btcticker/utils/TickerQuery.java TickerQuery.ragel
+// ragel -J -o src/com/appspot/btcticker/fsm/PathQuery.java PathQuery.ragel
 //
-package com.appspot.btcticker.utils;
+package com.appspot.btcticker.fsm;
 
-public class TickerQuery {
+import com.appspot.btcticker.enums.Currency;
+
+public class PathQuery {
 
 	public Currency from = Currency.BITCOIN;
 	public Currency to   = Currency.DOLLAR;
@@ -40,7 +42,8 @@ public class TickerQuery {
            ;
            
     main   := "/" number  %{ amount = i + f; } 
-           ( btc | usd | eur | gbp )?
+           ( btc | usd | eur | gbp ) ?
+           ".png" ?
            ;
 }%%
 

@@ -1,7 +1,7 @@
 // Generated using:
-// ragel -J -o src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java GoogleCurrencyCalculator.ragel
+// ragel -J -o src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java GoogleCurrencyCalculator.ragel
 //
-package com.appspot.btcticker.utils;
+package com.appspot.btcticker.fsm;
 
 public class GoogleCurrencyCalculator {
 	

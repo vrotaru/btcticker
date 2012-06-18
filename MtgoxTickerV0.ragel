@@ -1,7 +1,7 @@
 // Generated using:
-// ragel -J -o src/com/appspot/btcticker/utils/MtgoxTickerV0.java MtgoxTickerV0.ragel
+// ragel -J -o src/com/appspot/btcticker/fsm/MtgoxTickerV0.java MtgoxTickerV0.ragel
 //
-package com.appspot.btcticker.utils;
+package com.appspot.btcticker.fsm;
 
 public class MtgoxTickerV0 {
 	
