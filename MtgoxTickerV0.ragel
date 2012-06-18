@@ -1,0 +1,76 @@
+// Generated using:
+// ragel -J -o src/com/appspot/btcticker/utils/MtgoxTickerV0.java MtgoxTickerV0.ragel
+//
+package com.appspot.btcticker.utils;
+
+public class MtgoxTickerV0 {
+	
+	public static final String URL_V0 = "https://mtgox.com/api/0/data/ticker.php";
+
+%%{
+    machine ticker;
+    write data;
+}%%
+
+%%{
+    action log { System.out.println(json.substring(p)); }
+
+    action mark  { mark = p; }
+    action name {
+        attribute = json.substring(mark, p);
+    }
+
+    action clear { i = 0; f = 0.0; scale = 1.0; }
+    action ipart { i = i * 10 + (int)data[p] - zero; }
+    action fpart { scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
+
+    action assign {
+        if      ("buy".equals(attribute))  { buyValue = i + f; }
+        else if ("sell".equals(attribute)) { sellValue = i + f; }
+        else if ("last".equals(attribute)) { lastValue = i + f; }
+    }
+
+    number  = digit+ >clear $ipart ('.' digit+ $fpart)?
+            ;
+    attr    = '"' alpha >mark (alnum | '_')+ '"' >name ':' number
+            ;
+    ticker  = '{' attr (',' >assign attr)+ '}' >assign
+            ;
+
+    main    := '{' '"ticker"' ':' ticker '}'
+            ;
+
+}%%
+
+    public double weightedValue(String json) {
+        char[] data = json.toCharArray();
+        
+        // Used by Ragel
+        int cs;
+        int p = 0;
+        int pe = data.length;
+        
+        // Used to store extracted data
+        int mark = 0;
+        final int zero = (int) '0';
+        int i = 0;
+        double f = 0.0;
+        double scale = 1.0;
+
+        String attribute = null;
+
+        double lastValue = 0.0;
+        double buyValue = 0.0;
+        double sellValue = 0.0;
+
+        %% write init;
+        %% write exec;
+
+        if (cs < ticker_first_final) {
+            throw new RuntimeException("??? " + json);
+        }
+
+        return (sellValue + buyValue + 2*lastValue) / 4;
+    }
+
+}

@@ -1,0 +1,60 @@
+// Generated using:
+// ragel -J -o src/com/appspot/btcticker/utils/GoogleCurrencyCalculator.java GoogleCurrencyCalculator.ragel
+//
+package com.appspot.btcticker.utils;
+
+public class GoogleCurrencyCalculator {
+	
+	public static final String EURO_URL  = "http://www.google.com/ig/calculator?hl=en&q=1USD=?EUR";
+	public static final String POUND_URL = "http://www.google.com/ig/calculator?hl=en&q=1USD=?GBP";
+
+%%{
+	machine currency_converter;
+	write data;
+	
+    action clear { i = 0; f = 0.0; scale = 1.0; }
+    action ipart { i = i * 10 + (int)data[p] - zero; }
+    action fpart { scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
+    
+    number = digit+ >clear $ipart ('.' digit+ $fpart)?
+           ;
+    
+    lhs    = "lhs:" space* '"' (any - '"')* '"' ','
+           ;
+    rhs    = "rhs:" space* '"' number space (any - '"')* '"' ','
+           ;
+    error  = "error:" space* '"' '"' ','
+           ;
+    icc    =  "icc:" space* "true"
+           ;
+    
+    main   := "{" lhs rhs error icc "}"
+           ;
+	
+}%%
+
+	public double extract(String response) {
+	   char[] data = response.toCharArray();
+        
+        // Used by Ragel
+        int cs;
+        int p = 0;
+        int pe = data.length;
+        
+        // Used to store extracted data
+        final int zero = (int) '0';
+        int i = 0;
+        double f = 0.0;
+        double scale = 1.0;
+        
+        %% write init;
+        %% write exec;
+        
+        if (cs < currency_converter_first_final) {
+        	return -1.0;
+        }
+        else {
+        	return i + f;
+        }
+	}
+}

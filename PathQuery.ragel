@@ -1,0 +1,76 @@
+// Generated using:
+// ragel -J -o src/com/appspot/btcticker/utils/TickerQuery.java TickerQuery.ragel
+//
+package com.appspot.btcticker.utils;
+
+public class TickerQuery {
+
+	public Currency from = Currency.BITCOIN;
+	public Currency to   = Currency.DOLLAR;
+	public double amount = -9;
+
+%%{
+	machine query;
+	write data;
+	
+    action clear { i = 0; f = 0.0; scale = 1.0; }
+    action ipart { i = i * 10 + (int)data[p] - zero; }
+    action fpart { scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
+    
+    number = digit+ >clear $ipart ('.' digit+ $fpart)?
+           ;
+           
+    btc    = "btc" 
+           ( '2' 
+               ( "usd" > { } 
+               | "eur" > { to = Currency.EURO; } 
+               | "gbp" > { to = Currency.POUND; } 
+               ) 
+           )?
+           ;
+    
+    usd    = "usd" > { from = Currency.DOLLAR; to = Currency.BITCOIN; }
+           "2btc"?
+           ;
+    eur    = "eur" > { from = Currency.EURO; to = Currency.BITCOIN; }
+           "2btc"?
+           ;
+    gbp    = "gbp" > { from = Currency.POUND; to = Currency.BITCOIN; }
+           "2btc"?
+           ;
+           
+    main   := "/" number  %{ amount = i + f; } 
+           ( btc | usd | eur | gbp )?
+           ;
+}%%
+
+	public boolean parse(String urlPart) {
+		char[] data = urlPart.toCharArray();
+		
+		// Used by Ragel
+        int cs;
+        int p = 0;
+        int pe = data.length;
+        int eof = data.length;
+        
+        // Used to store extracted data
+        final int zero = (int) '0';
+        int i = 0;
+        double f = 0.0;
+        double scale = 1.0;
+		
+		// reset state
+		from = Currency.BITCOIN;
+		to   = Currency.DOLLAR;
+		amount = -1;
+		
+		%% write init;
+		%% write exec;
+		
+		if (cs < query_first_final) {
+			return false;
+		}
+		
+		return true;
+	}
+}
