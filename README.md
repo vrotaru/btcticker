@@ -1,6 +1,6 @@
 Bitcoin Ticker
 --------------
 
-Mostly just a pretext to try Ragel and Google AppEngine. And as of last Twitter Bootstrap.
+Mostly just a pretext to try [Ragel](http://www.complang.org/ragel/) and Google [AppEngine](https://appengine.google.com/). And as of last Twitter [Bootstrap](http://twitter.github.com/bootstrap/index.html).
 
-But it works.
+Strangely enough, it works. [Bitcoin Tickers](http://btcticker.appspot.com/)

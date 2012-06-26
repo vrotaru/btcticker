@@ -79,17 +79,22 @@ public class BtctickerServlet extends HttpServlet {
 			return;
 		}
 
-		double amount = computeAmount(query);
-
-		if (amount < 0 || amount > 1000 * 1000) {
-			resp.sendRedirect("../images/overflow.png");
-			return;
+		double amount;
+		try {
+			amount = computeAmount(query);
+			
+			if (amount < 0 || amount > 1000 * 1000) {
+				resp.sendRedirect("../images/overflow.png");
+				return;
+			}
+			Image canvas = getTickerImage(query.to, amount);
+			
+			resp.setContentType("image/png");
+			resp.getOutputStream().write(canvas.getImageData());
+			
+		} catch (Exception e) {
+			resp.sendRedirect("../images/no-data.png");			
 		}
-
-		Image canvas = getTickerImage(query.to, amount);
-
-		resp.setContentType("image/png");
-		resp.getOutputStream().write(canvas.getImageData());
 	}
 
 	private void loadImages() throws ServletException {
@@ -135,13 +140,12 @@ public class BtctickerServlet extends HttpServlet {
 		}
 
 		MtgoxTickerV0 tickerV0 = new MtgoxTickerV0();
-//		URL url = new URL(TickerV0.URL_V0);
-//
-//		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-//		String response = reader.readLine();
+		URL url = new URL(MtgoxTickerV0.URL_V0);
 
-//		reader.close();
-		String response = "{\"ticker\":{\"high\":6.49998,\"low\":6.03,\"avg\":6.271624341,\"vwap\":6.27183551,\"vol\":60333,\"last_all\":6.271,\"last_local\":6.271,\"last\":6.271,\"buy\":6.275,\"sell\":6.30538}}";
+		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+		String response = reader.readLine();
+
+		reader.close();
 
 		// update timestamp
 		btcTimestamp = System.currentTimeMillis();
