@@ -138,6 +138,8 @@ public class BtctickerServlet extends HttpServlet {
 		if (upToDate(Currency.BITCOIN)) {
 			return;
 		}
+		// Reset imageCache
+		imageCache.clearAll();
 
 		MtgoxTickerV0 tickerV0 = new MtgoxTickerV0();
 		URL url = new URL(MtgoxTickerV0.URL_V0);
