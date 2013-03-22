@@ -71,6 +71,10 @@ public class BtctickerServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String pathInfo = req.getPathInfo();
+		
+		if (pathInfo == null) {
+			resp.sendRedirect("../images/invalid-url.png");
+		}
 
 		PathQuery query = new PathQuery();
 		boolean ok = query.parse(pathInfo);
