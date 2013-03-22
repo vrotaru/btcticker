@@ -7,7 +7,7 @@ package com.appspot.btcticker.fsm;
 
 public class MtgoxTickerV0 {
 	
-	public static final String URL_V0 = "https://mtgox.com/api/0/data/ticker.php";
+	public static final String URL_V0 = "https://data.mtgox.com/api/0/data/ticker.php";
 
 
 // line 14 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
@@ -26,8 +26,9 @@ private static byte[] init__ticker_key_offsets_0()
 {
 	return new byte [] {
 	    0,    0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,
-	   11,   12,   16,   23,   31,   32,   34,   38,   39,   43,   50,   58,
-	   59,   61,   66,   68,   72,   73,   75,   78
+	   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,   21,   22,
+	   23,   24,   25,   29,   36,   44,   45,   47,   51,   52,   56,   63,
+	   71,   72,   74,   79,   81,   85,   86,   88,   91
 	};
 }
 
@@ -37,13 +38,14 @@ private static final byte _ticker_key_offsets[] = init__ticker_key_offsets_0();
 private static char[] init__ticker_trans_keys_0()
 {
 	return new char [] {
-	  123,   34,  116,  105,   99,  107,  101,  114,   34,   58,  123,   34,
-	   65,   90,   97,  122,   95,   48,   57,   65,   90,   97,  122,   34,
-	   95,   48,   57,   65,   90,   97,  122,   58,   48,   57,   44,   46,
-	   48,   57,   34,   65,   90,   97,  122,   95,   48,   57,   65,   90,
-	   97,  122,   34,   95,   48,   57,   65,   90,   97,  122,   58,   48,
-	   57,   44,   46,  125,   48,   57,   48,   57,   44,  125,   48,   57,
-	  125,   48,   57,   44,   48,   57,    0
+	  123,   34,  119,   97,  114,  110,  105,  110,  103,   34,   58,   34,
+	   34,   44,   34,  116,  105,   99,  107,  101,  114,   34,   58,  123,
+	   34,   65,   90,   97,  122,   95,   48,   57,   65,   90,   97,  122,
+	   34,   95,   48,   57,   65,   90,   97,  122,   58,   48,   57,   44,
+	   46,   48,   57,   34,   65,   90,   97,  122,   95,   48,   57,   65,
+	   90,   97,  122,   34,   95,   48,   57,   65,   90,   97,  122,   58,
+	   48,   57,   44,   46,  125,   48,   57,   48,   57,   44,  125,   48,
+	   57,  125,   48,   57,   44,   48,   57,    0
 	};
 }
 
@@ -54,8 +56,9 @@ private static byte[] init__ticker_single_lengths_0()
 {
 	return new byte [] {
 	    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-	    1,    0,    1,    2,    1,    0,    2,    1,    0,    1,    2,    1,
-	    0,    3,    0,    2,    1,    0,    1,    0
+	    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+	    1,    1,    0,    1,    2,    1,    0,    2,    1,    0,    1,    2,
+	    1,    0,    3,    0,    2,    1,    0,    1,    0
 	};
 }
 
@@ -66,24 +69,26 @@ private static byte[] init__ticker_range_lengths_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    2,    3,    3,    0,    1,    1,    0,    2,    3,    3,    0,
-	    1,    1,    1,    1,    0,    1,    1,    0
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    0,    2,    3,    3,    0,    1,    1,    0,    2,    3,    3,
+	    0,    1,    1,    1,    1,    0,    1,    1,    0
 	};
 }
 
 private static final byte _ticker_range_lengths[] = init__ticker_range_lengths_0();
 
 
-private static byte[] init__ticker_index_offsets_0()
+private static short[] init__ticker_index_offsets_0()
 {
-	return new byte [] {
+	return new short [] {
 	    0,    0,    2,    4,    6,    8,   10,   12,   14,   16,   18,   20,
-	   22,   24,   27,   32,   38,   40,   42,   46,   48,   51,   56,   62,
-	   64,   66,   71,   73,   77,   79,   81,   84
+	   22,   24,   26,   28,   30,   32,   34,   36,   38,   40,   42,   44,
+	   46,   48,   50,   53,   58,   64,   66,   68,   72,   74,   77,   82,
+	   88,   90,   92,   97,   99,  103,  105,  107,  110
 	};
 }
 
-private static final byte _ticker_index_offsets[] = init__ticker_index_offsets_0();
+private static final short _ticker_index_offsets[] = init__ticker_index_offsets_0();
 
 
 private static byte[] init__ticker_indicies_0()
@@ -91,12 +96,14 @@ private static byte[] init__ticker_indicies_0()
 	return new byte [] {
 	    0,    1,    2,    1,    3,    1,    4,    1,    5,    1,    6,    1,
 	    7,    1,    8,    1,    9,    1,   10,    1,   11,    1,   12,    1,
-	   13,   13,    1,   14,   14,   14,   14,    1,   15,   14,   14,   14,
-	   14,    1,   16,    1,   17,    1,   18,   19,   20,    1,   21,    1,
-	   22,   22,    1,   23,   23,   23,   23,    1,   24,   23,   23,   23,
-	   23,    1,   25,    1,   26,    1,   18,   27,   29,   28,    1,   30,
-	    1,   18,   29,   30,    1,   31,    1,   32,    1,   18,   32,    1,
-	    1,    0
+	   13,   12,   14,    1,   15,    1,   16,    1,   17,    1,   18,    1,
+	   19,    1,   20,    1,   21,    1,   22,    1,   23,    1,   24,    1,
+	   25,    1,   26,   26,    1,   27,   27,   27,   27,    1,   28,   27,
+	   27,   27,   27,    1,   29,    1,   30,    1,   31,   32,   33,    1,
+	   34,    1,   35,   35,    1,   36,   36,   36,   36,    1,   37,   36,
+	   36,   36,   36,    1,   38,    1,   39,    1,   31,   40,   42,   41,
+	    1,   43,    1,   31,   42,   43,    1,   44,    1,   45,    1,   31,
+	   45,    1,    1,    0
 	};
 }
 
@@ -107,8 +114,9 @@ private static byte[] init__ticker_trans_targs_0()
 {
 	return new byte [] {
 	    2,    0,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,
-	   13,   14,   15,   16,   17,   18,   19,   29,   18,   20,   21,   22,
-	   23,   24,   25,   26,   25,   28,   27,   31,   30
+	   13,   14,   15,   16,   17,   18,   19,   20,   21,   22,   23,   24,
+	   25,   26,   27,   28,   29,   30,   31,   32,   42,   31,   33,   34,
+	   35,   36,   37,   38,   39,   38,   41,   40,   44,   43
 	};
 }
 
@@ -119,8 +127,9 @@ private static byte[] init__ticker_trans_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    1,    0,    3,    0,   11,    9,    0,    5,    0,    1,    0,
-	    3,    0,   11,    0,    5,    9,    7,    0,    7
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    0,    1,    0,    3,    0,   11,    9,    0,    5,    0,    1,
+	    0,    3,    0,   11,    0,    5,    9,    7,    0,    7
 	};
 }
 
@@ -128,7 +137,7 @@ private static final byte _ticker_trans_actions[] = init__ticker_trans_actions_0
 
 
 static final int ticker_start = 1;
-static final int ticker_first_final = 31;
+static final int ticker_first_final = 44;
 static final int ticker_error = 0;
 
 static final int ticker_en_main = 1;
@@ -138,7 +147,7 @@ static final int ticker_en_main = 1;
 
 
 
-// line 43 "MtgoxTickerV0.ragel"
+// line 44 "MtgoxTickerV0.ragel"
 
 
     public double weightedValue(String json) {
@@ -163,14 +172,14 @@ static final int ticker_en_main = 1;
         double sellValue = 0.0;
 
         
-// line 167 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
+// line 176 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 	{
 	cs = ticker_start;
 	}
 
-// line 67 "MtgoxTickerV0.ragel"
+// line 68 "MtgoxTickerV0.ragel"
         
-// line 174 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
+// line 183 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -280,7 +289,7 @@ case 1:
         else if ("last".equals(attribute)) { lastValue = i + f; }
     }
 	break;
-// line 284 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
+// line 293 "src/com/appspot/btcticker/fsm/MtgoxTickerV0.java"
 			}
 		}
 	}
@@ -300,7 +309,7 @@ case 5:
 	break; }
 	}
 
-// line 68 "MtgoxTickerV0.ragel"
+// line 69 "MtgoxTickerV0.ragel"
 
         if (cs < ticker_first_final) {
             throw new RuntimeException("??? " + json);

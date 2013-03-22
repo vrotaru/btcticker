@@ -5,7 +5,7 @@ package com.appspot.btcticker.fsm;
 
 public class MtgoxTickerV0 {
 	
-	public static final String URL_V0 = "https://mtgox.com/api/0/data/ticker.php";
+	public static final String URL_V0 = "https://data.mtgox.com/api/0/data/ticker.php";
 
 %%{
     machine ticker;
@@ -36,8 +36,9 @@ public class MtgoxTickerV0 {
             ;
     ticker  = '{' attr (',' >assign attr)+ '}' >assign
             ;
-
-    main    := '{' '"ticker"' ':' ticker '}'
+    warning = '"warning"' ':' '"' (any - '"')* '"'
+            ;
+    main    := '{' warning ',' '"ticker"' ':' ticker '}'
             ;
 
 }%%
