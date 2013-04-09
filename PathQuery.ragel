@@ -26,7 +26,8 @@ public class PathQuery {
            ( '2' 
                ( "usd" > { } 
                | "eur" > { to = Currency.EURO; } 
-               | "gbp" > { to = Currency.POUND; } 
+               | "gbp" > { to = Currency.POUND; }
+               | "dkk" > { to = Currency.DKK; }
                ) 
            )?
            ;
@@ -40,9 +41,10 @@ public class PathQuery {
     gbp    = "gbp" > { from = Currency.POUND; to = Currency.BITCOIN; }
            "2btc"?
            ;
-           
+    dkk    = "dkk" > { from = Currency.DKK; to = Currency.BITCOIN; }
+           ;          
     main   := "/" number  %{ amount = i + f; } 
-           ( btc | usd | eur | gbp ) ?
+           ( btc | usd | eur | gbp | dkk ) ?
            ".png" ?
            ;
 }%%

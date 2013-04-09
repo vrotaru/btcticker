@@ -60,6 +60,9 @@ public class BtctickerServlet extends HttpServlet {
 
 	private double poundRate;
 	private long poundTimestamp;
+	
+	private double kroneRate;
+	private long kroneTimestamp;
 
 	@Override
 	public void init() throws ServletException {
@@ -122,6 +125,9 @@ public class BtctickerServlet extends HttpServlet {
 
 			currencies[Currency.EURO.ordinal()] = cut(symbols, offset, offset + 11);
 			offset = offset + 11;
+			
+			// Quick hack
+			currencies[Currency.DKK.ordinal()] = cut(symbols, offset-1, offset + 1);
 
 			dot = cut(symbols, offset + 4, symbols.getWidth());
 
@@ -168,6 +174,8 @@ public class BtctickerServlet extends HttpServlet {
 			return (System.currentTimeMillis() - euroTimestamp) < CURRENCY_INTERVAL;
 		case POUND:
 			return (System.currentTimeMillis() - poundTimestamp) < CURRENCY_INTERVAL;
+		case DKK:
+			return (System.currentTimeMillis() - kroneTimestamp) < CURRENCY_INTERVAL;
 		default:
 			throw new IllegalStateException();
 		}
@@ -192,6 +200,11 @@ public class BtctickerServlet extends HttpServlet {
 			}
 			gcUrl = GoogleCurrencyCalculator.POUND_URL;
 			break;
+		case DKK:
+			if (upToDate(Currency.DKK)) {
+				return kroneRate;
+			}
+			gcUrl = GoogleCurrencyCalculator.DKK_URL;
 		}
 
 		URL url = new URL(gcUrl);
@@ -211,6 +224,12 @@ public class BtctickerServlet extends HttpServlet {
 			poundRate = rate;
 			poundTimestamp = System.currentTimeMillis();
 			break;
+		case DKK:
+			kroneRate = rate;
+			kroneTimestamp = System.currentTimeMillis();
+			break;
+		default:
+				throw new IllegalStateException("Internal error");
 		}
 		return rate;
 	}

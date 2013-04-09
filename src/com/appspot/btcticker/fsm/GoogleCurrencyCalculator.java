@@ -9,9 +9,10 @@ public class GoogleCurrencyCalculator {
 	
 	public static final String EURO_URL  = "http://www.google.com/ig/calculator?hl=en&q=1USD=?EUR";
 	public static final String POUND_URL = "http://www.google.com/ig/calculator?hl=en&q=1USD=?GBP";
+	public static final String DKK_URL   = "http://www.google.com/ig/calculator?hl=en&q=1USD=?DKK";
 
 
-// line 15 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
+// line 16 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 private static byte[] init__currency_converter_actions_0()
 {
 	return new byte [] {
@@ -139,7 +140,7 @@ static final int currency_converter_error = 0;
 static final int currency_converter_en_main = 1;
 
 
-// line 34 "GoogleCurrencyCalculator.ragel"
+// line 35 "GoogleCurrencyCalculator.ragel"
 
 
 	public double extract(String response) {
@@ -157,14 +158,14 @@ static final int currency_converter_en_main = 1;
         double scale = 1.0;
         
         
-// line 161 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
+// line 162 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 	{
 	cs = currency_converter_start;
 	}
 
-// line 51 "GoogleCurrencyCalculator.ragel"
+// line 52 "GoogleCurrencyCalculator.ragel"
         
-// line 168 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
+// line 169 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -245,18 +246,18 @@ case 1:
 			switch ( _currency_converter_actions[_acts++] )
 			{
 	case 0:
-// line 15 "GoogleCurrencyCalculator.ragel"
+// line 16 "GoogleCurrencyCalculator.ragel"
 	{ i = 0; f = 0.0; scale = 1.0; }
 	break;
 	case 1:
-// line 16 "GoogleCurrencyCalculator.ragel"
+// line 17 "GoogleCurrencyCalculator.ragel"
 	{ i = i * 10 + (int)data[p] - zero; }
 	break;
 	case 2:
-// line 17 "GoogleCurrencyCalculator.ragel"
+// line 18 "GoogleCurrencyCalculator.ragel"
 	{ scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
 	break;
-// line 260 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
+// line 261 "src/com/appspot/btcticker/fsm/GoogleCurrencyCalculator.java"
 			}
 		}
 	}
@@ -276,7 +277,7 @@ case 5:
 	break; }
 	}
 
-// line 52 "GoogleCurrencyCalculator.ragel"
+// line 53 "GoogleCurrencyCalculator.ragel"
         
         if (cs < currency_converter_first_final) {
         	return -1.0;
