@@ -335,6 +335,7 @@ public class BtctickerServlet extends HttpServlet {
 
 		byte[] data = new byte[inputStream.available()];
 		inputStream.read(data);
+		inputStream.close();
 
 		return ImagesServiceFactory.makeImage(data);
 	}
