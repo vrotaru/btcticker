@@ -6,21 +6,24 @@
 package com.appspot.btcticker.fsm;
 
 import com.appspot.btcticker.enums.Currency;
+import com.appspot.btcticker.enums.Rate;
 
 public class PathQuery {
 
 	public Currency from = Currency.BITCOIN;
 	public Currency to   = Currency.DOLLAR;
+	public Rate rate = Rate.TICKER;
 	public double amount = -9;
 
 
-// line 18 "src/com/appspot/btcticker/fsm/PathQuery.java"
+// line 20 "src/com/appspot/btcticker/fsm/PathQuery.java"
 private static byte[] init__query_actions_0()
 {
 	return new byte [] {
 	    0,    1,    1,    1,    2,    1,    3,    1,    4,    1,    5,    1,
-	    6,    1,   11,    2,    0,    1,    2,   11,    7,    2,   11,    8,
-	    2,   11,    9,    2,   11,   10
+	    6,    1,    7,    1,    8,    1,    9,    1,   10,    1,   15,    1,
+	   17,    1,   18,    2,    0,    1,    2,   15,   11,    2,   15,   12,
+	    2,   15,   13,    2,   15,   14,    3,   16,    0,    1
 	};
 }
 
@@ -30,9 +33,11 @@ private static final byte _query_actions[] = init__query_actions_0();
 private static byte[] init__query_key_offsets_0()
 {
 	return new byte [] {
-	    0,    0,    1,    3,    6,    7,    8,    9,   10,   11,   15,   16,
-	   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,
-	   29,   30,   31,   32,   40,   48,   48,   50,   51
+	    0,    0,    1,    5,    8,    9,   10,   11,   12,   13,   17,   18,
+	   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,
+	   31,   32,   33,   34,   35,   36,   38,   41,   42,   43,   47,   48,
+	   49,   50,   52,   55,   63,   71,   71,   73,   74,   76,   80,   84,
+	   86,   90
 	};
 }
 
@@ -42,11 +47,14 @@ private static final byte _query_key_offsets[] = init__query_key_offsets_0();
 private static char[] init__query_trans_keys_0()
 {
 	return new char [] {
-	   47,   48,   57,  112,   48,   57,  112,  110,  103,  116,   99,  100,
-	  101,  103,  117,  107,  107,  117,  114,   98,  112,  115,  100,  117,
-	  114,   98,  116,   99,   98,  112,  115,  100,   46,   98,  100,  101,
-	  103,  117,   48,   57,   46,   98,  100,  101,  103,  117,   48,   57,
-	   46,   50,   46,   46,   50,    0
+	   47,   98,  115,   48,   57,  112,   48,   57,  112,  110,  103,  116,
+	   99,  100,  101,  103,  117,  107,  107,  117,  114,   98,  112,  115,
+	  100,  117,  114,   98,  116,   99,   98,  112,  115,  100,  117,  121,
+	   48,   57,  112,   48,   57,  116,   99,  100,  101,  103,  117,  101,
+	  108,  108,   48,   57,  112,   48,   57,   46,   98,  100,  101,  103,
+	  117,   48,   57,   46,   98,  100,  101,  103,  117,   48,   57,   46,
+	   50,   46,   46,   50,   46,   98,   48,   57,   46,   98,   48,   57,
+	   46,   52,   46,   98,   48,   57,   46,   98,   48,   57,    0
 	};
 }
 
@@ -56,9 +64,11 @@ private static final char _query_trans_keys[] = init__query_trans_keys_0();
 private static byte[] init__query_single_lengths_0()
 {
 	return new byte [] {
-	    0,    1,    0,    1,    1,    1,    1,    1,    1,    4,    1,    1,
+	    0,    1,    2,    1,    1,    1,    1,    1,    1,    4,    1,    1,
 	    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-	    1,    1,    1,    6,    6,    0,    2,    1,    2
+	    1,    1,    1,    1,    1,    0,    1,    1,    1,    4,    1,    1,
+	    1,    0,    1,    6,    6,    0,    2,    1,    2,    2,    2,    2,
+	    2,    2
 	};
 }
 
@@ -70,35 +80,43 @@ private static byte[] init__query_range_lengths_0()
 	return new byte [] {
 	    0,    0,    1,    1,    0,    0,    0,    0,    0,    0,    0,    0,
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    1,    1,    0,    0,    0,    0
+	    0,    0,    0,    0,    0,    1,    1,    0,    0,    0,    0,    0,
+	    0,    1,    1,    1,    1,    0,    0,    0,    0,    1,    1,    0,
+	    1,    1
 	};
 }
 
 private static final byte _query_range_lengths[] = init__query_range_lengths_0();
 
 
-private static byte[] init__query_index_offsets_0()
+private static short[] init__query_index_offsets_0()
 {
-	return new byte [] {
-	    0,    0,    2,    4,    7,    9,   11,   13,   15,   17,   22,   24,
-	   26,   28,   30,   32,   34,   36,   38,   40,   42,   44,   46,   48,
-	   50,   52,   54,   56,   64,   72,   73,   76,   78
+	return new short [] {
+	    0,    0,    2,    6,    9,   11,   13,   15,   17,   19,   24,   26,
+	   28,   30,   32,   34,   36,   38,   40,   42,   44,   46,   48,   50,
+	   52,   54,   56,   58,   60,   62,   64,   67,   69,   71,   76,   78,
+	   80,   82,   84,   87,   95,  103,  104,  107,  109,  112,  116,  120,
+	  123,  127
 	};
 }
 
-private static final byte _query_index_offsets[] = init__query_index_offsets_0();
+private static final short _query_index_offsets[] = init__query_index_offsets_0();
 
 
 private static byte[] init__query_indicies_0()
 {
 	return new byte [] {
-	    0,    1,    2,    1,    4,    3,    1,    4,    1,    5,    1,    6,
-	    1,    7,    1,    8,    1,    9,   10,   11,   12,    1,   13,    1,
-	   14,    1,   15,    1,   14,    1,   16,    1,   14,    1,   17,    1,
-	   14,    1,   18,    1,   19,    1,   20,    1,   21,    1,   14,    1,
-	   22,    1,   19,    1,   23,    1,   19,    1,   24,   26,   27,   28,
-	   29,   30,   25,    1,   31,   26,   27,   28,   29,   30,    3,    1,
-	    1,   32,   33,    1,   32,    1,   32,   34,    1,    0
+	    0,    1,    3,    4,    2,    1,    6,    5,    1,    6,    1,    7,
+	    1,    8,    1,    9,    1,   10,    1,   11,   12,   13,   14,    1,
+	   15,    1,   16,    1,   17,    1,   16,    1,   18,    1,   16,    1,
+	   19,    1,   16,    1,   20,    1,   21,    1,   22,    1,   23,    1,
+	   16,    1,   24,    1,   21,    1,   25,    1,   21,    1,   26,    1,
+	   27,    1,   28,    1,    6,   29,    1,   30,    1,   31,    1,   32,
+	   33,   34,   35,    1,   36,    1,   37,    1,   38,    1,   39,    1,
+	    6,   40,    1,   41,   43,   44,   45,   46,   47,   42,    1,   48,
+	   43,   44,   45,   46,   47,    5,    1,    1,   49,   50,    1,   49,
+	    1,   49,   51,    1,   52,   54,   53,    1,   55,   54,   29,    1,
+	   49,   56,    1,   57,   59,   58,    1,   60,   59,   40,    1,    0
 	};
 }
 
@@ -108,9 +126,12 @@ private static final byte _query_indicies[] = init__query_indicies_0();
 private static byte[] init__query_trans_targs_0()
 {
 	return new byte [] {
-	    2,    0,   27,   28,    5,    6,   29,    8,   30,   10,   12,   14,
-	   16,   11,   31,   13,   15,   17,   19,   32,   21,   22,   24,   26,
-	    3,   27,    7,   10,   18,   23,   25,    4,    4,    9,   20
+	    2,    0,   39,   27,   34,   40,    5,    6,   41,    8,   42,   10,
+	   12,   14,   16,   11,   43,   13,   15,   17,   19,   44,   21,   22,
+	   24,   26,   28,   29,   45,   46,   32,   47,   10,   12,   14,   16,
+	   35,   36,   37,   48,   49,    3,   39,    7,   10,   18,   23,   25,
+	    4,    4,    9,   20,   30,   45,   31,    4,   33,   38,   48,   31,
+	    4
 	};
 }
 
@@ -120,9 +141,12 @@ private static final byte _query_trans_targs[] = init__query_trans_targs_0();
 private static byte[] init__query_trans_actions_0()
 {
 	return new byte [] {
-	    0,    0,   15,    3,    0,    0,    0,    0,    0,   11,    7,    9,
-	    5,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	   13,    1,   13,   27,   21,   24,   18,   13,    0,    0,    0
+	    0,    0,   27,    0,    0,    3,    0,    0,    0,    0,    0,   11,
+	    7,    9,    5,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    0,    0,    0,   42,    3,    0,    0,   19,   15,   17,   13,
+	    0,    0,    0,   27,    3,   21,    1,   21,   39,   33,   36,   30,
+	   21,    0,    0,    0,   23,    1,   23,   23,    0,   25,    1,   25,
+	   25
 	};
 }
 
@@ -134,7 +158,9 @@ private static byte[] init__query_eof_actions_0()
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,   13,   13,    0,    0,    0,    0
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    0,    0,   21,   21,    0,    0,    0,    0,   23,   23,    0,
+	   25,   25
 	};
 }
 
@@ -142,13 +168,13 @@ private static final byte _query_eof_actions[] = init__query_eof_actions_0();
 
 
 static final int query_start = 1;
-static final int query_first_final = 27;
+static final int query_first_final = 39;
 static final int query_error = 0;
 
 static final int query_en_main = 1;
 
 
-// line 50 "PathQuery.ragel"
+// line 71 "PathQuery.ragel"
 
 
 	public boolean parse(String urlPart) {
@@ -172,14 +198,14 @@ static final int query_en_main = 1;
 		amount = -1;
 		
 		
-// line 176 "src/com/appspot/btcticker/fsm/PathQuery.java"
+// line 202 "src/com/appspot/btcticker/fsm/PathQuery.java"
 	{
 	cs = query_start;
 	}
 
-// line 73 "PathQuery.ragel"
+// line 94 "PathQuery.ragel"
 		
-// line 183 "src/com/appspot/btcticker/fsm/PathQuery.java"
+// line 209 "src/com/appspot/btcticker/fsm/PathQuery.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -260,54 +286,82 @@ case 1:
 			switch ( _query_actions[_acts++] )
 			{
 	case 0:
-// line 18 "PathQuery.ragel"
+// line 20 "PathQuery.ragel"
 	{ i = 0; f = 0.0; scale = 1.0; }
 	break;
 	case 1:
-// line 19 "PathQuery.ragel"
+// line 21 "PathQuery.ragel"
 	{ i = i * 10 + (int)data[p] - zero; }
 	break;
 	case 2:
-// line 20 "PathQuery.ragel"
+// line 22 "PathQuery.ragel"
 	{ scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
 	break;
 	case 3:
-// line 27 "PathQuery.ragel"
+// line 29 "PathQuery.ragel"
 	{ }
 	break;
 	case 4:
-// line 28 "PathQuery.ragel"
+// line 30 "PathQuery.ragel"
 	{ to = Currency.EURO; }
 	break;
 	case 5:
-// line 29 "PathQuery.ragel"
+// line 31 "PathQuery.ragel"
 	{ to = Currency.POUND; }
 	break;
 	case 6:
-// line 30 "PathQuery.ragel"
+// line 32 "PathQuery.ragel"
 	{ to = Currency.DKK; }
 	break;
 	case 7:
-// line 35 "PathQuery.ragel"
-	{ from = Currency.DOLLAR; to = Currency.BITCOIN; }
+// line 38 "PathQuery.ragel"
+	{ }
 	break;
 	case 8:
-// line 38 "PathQuery.ragel"
-	{ from = Currency.EURO; to = Currency.BITCOIN; }
+// line 39 "PathQuery.ragel"
+	{ to = Currency.EURO; }
 	break;
 	case 9:
-// line 41 "PathQuery.ragel"
-	{ from = Currency.POUND; to = Currency.BITCOIN; }
+// line 40 "PathQuery.ragel"
+	{ to = Currency.POUND; }
 	break;
 	case 10:
-// line 44 "PathQuery.ragel"
-	{ from = Currency.DKK; to = Currency.BITCOIN; }
+// line 41 "PathQuery.ragel"
+	{ to = Currency.DKK; }
 	break;
 	case 11:
 // line 46 "PathQuery.ragel"
+	{ from = Currency.DOLLAR; to = Currency.BITCOIN; }
+	break;
+	case 12:
+// line 49 "PathQuery.ragel"
+	{ from = Currency.EURO; to = Currency.BITCOIN; }
+	break;
+	case 13:
+// line 52 "PathQuery.ragel"
+	{ from = Currency.POUND; to = Currency.BITCOIN; }
+	break;
+	case 14:
+// line 55 "PathQuery.ragel"
+	{ from = Currency.DKK; to = Currency.BITCOIN; }
+	break;
+	case 15:
+// line 57 "PathQuery.ragel"
 	{ amount = i + f; }
 	break;
-// line 311 "src/com/appspot/btcticker/fsm/PathQuery.java"
+	case 16:
+// line 61 "PathQuery.ragel"
+	{ rate = Rate.BUY; }
+	break;
+	case 17:
+// line 61 "PathQuery.ragel"
+	{ amount = i + f; }
+	break;
+	case 18:
+// line 65 "PathQuery.ragel"
+	{ amount = i + f; }
+	break;
+// line 365 "src/com/appspot/btcticker/fsm/PathQuery.java"
 			}
 		}
 	}
@@ -328,11 +382,19 @@ case 4:
 	int __nacts = (int) _query_actions[__acts++];
 	while ( __nacts-- > 0 ) {
 		switch ( _query_actions[__acts++] ) {
-	case 11:
-// line 46 "PathQuery.ragel"
+	case 15:
+// line 57 "PathQuery.ragel"
 	{ amount = i + f; }
 	break;
-// line 336 "src/com/appspot/btcticker/fsm/PathQuery.java"
+	case 17:
+// line 61 "PathQuery.ragel"
+	{ amount = i + f; }
+	break;
+	case 18:
+// line 65 "PathQuery.ragel"
+	{ amount = i + f; }
+	break;
+// line 398 "src/com/appspot/btcticker/fsm/PathQuery.java"
 		}
 	}
 	}
@@ -342,7 +404,7 @@ case 5:
 	break; }
 	}
 
-// line 74 "PathQuery.ragel"
+// line 95 "PathQuery.ragel"
 		
 		if (cs < query_first_final) {
 			return false;

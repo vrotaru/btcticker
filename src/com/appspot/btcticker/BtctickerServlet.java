@@ -54,6 +54,8 @@ public class BtctickerServlet extends HttpServlet {
 	// Rates and their timestamps
 	//
 	private double btcRate;
+	private double buyRate;
+	private double sellRate;
 	private long btcTimestamp;
 
 	private double euroRate;
@@ -166,6 +168,8 @@ public class BtctickerServlet extends HttpServlet {
 			throw new RuntimeException("failed to parse: " + response);
 		}
 		btcRate = valuation.weightedValue();
+		buyRate = valuation.buy;
+		sellRate = valuation.sell;
 	}
 
 	private boolean upToDate(Currency currency) {
@@ -241,22 +245,36 @@ public class BtctickerServlet extends HttpServlet {
 	private double computeAmount(PathQuery query) throws IOException {
 
 		updateBitcoinValue();
+		final double neededRate = getBtcRate(query);
 
 		double multiplier;
 		if (query.to == Currency.BITCOIN) {
-			multiplier = 1.0 / btcRate;
+			multiplier = 1.0 / neededRate;
 
 			double rate = getCurrencyValue(query.from);
 			multiplier = multiplier / rate;
 		}
 		else {
-			multiplier = btcRate;
+			multiplier = neededRate;
 
 			double rate = getCurrencyValue(query.to);
 			multiplier = multiplier * rate;
 		}
 
 		return query.amount * multiplier;
+	}
+	
+	private double getBtcRate(PathQuery query) {
+		switch (query.rate) {
+		case TICKER:
+			return btcRate;
+		case BUY:
+			return buyRate;
+		case SELL:
+			return sellRate;
+		default:
+			throw new IllegalStateException("Unknow BTC rate type");
+		}
 	}
 
 	private Image getTickerImage(Currency currency, double value) {

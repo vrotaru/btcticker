@@ -4,11 +4,13 @@
 package com.appspot.btcticker.fsm;
 
 import com.appspot.btcticker.enums.Currency;
+import com.appspot.btcticker.enums.Rate;
 
 public class PathQuery {
 
 	public Currency from = Currency.BITCOIN;
 	public Currency to   = Currency.DOLLAR;
+	public Rate rate = Rate.TICKER;
 	public double amount = -9;
 
 %%{
@@ -31,21 +33,40 @@ public class PathQuery {
                ) 
            )?
            ;
+    btc4   = "btc" 
+           ( '4' 
+               ( "usd" > { } 
+               | "eur" > { to = Currency.EURO; } 
+               | "gbp" > { to = Currency.POUND; }
+               | "dkk" > { to = Currency.DKK; }
+               ) 
+           )?
+           ;
     
-    usd    = "usd" > { from = Currency.DOLLAR; to = Currency.BITCOIN; }
+    usd    = "usd" % { from = Currency.DOLLAR; to = Currency.BITCOIN; }
            "2btc"?
            ;
-    eur    = "eur" > { from = Currency.EURO; to = Currency.BITCOIN; }
+    eur    = "eur" % { from = Currency.EURO; to = Currency.BITCOIN; }
            "2btc"?
            ;
-    gbp    = "gbp" > { from = Currency.POUND; to = Currency.BITCOIN; }
+    gbp    = "gbp" % { from = Currency.POUND; to = Currency.BITCOIN; }
            "2btc"?
            ;
-    dkk    = "dkk" > { from = Currency.DKK; to = Currency.BITCOIN; }
-           ;          
-    main   := "/" number  %{ amount = i + f; } 
+    dkk    = "dkk" % { from = Currency.DKK; to = Currency.BITCOIN; }
+           ;
+    ticker = "/" number  % { amount = i + f; } 
            ( btc | usd | eur | gbp | dkk ) ?
            ".png" ?
+           ;
+    buy    = "/buy" % { rate = Rate.BUY; }  number % { amount = i + f; } 
+           btc4 ? 
+           ".png" ?
+           ;
+    sell   = "/sell" % { rate = Rate.SELL; } number % { amount = i + f; } 
+           btc4 ?  
+           ".png" ?
+           ;
+    main   := ticker | buy | sell
            ;
 }%%
 
