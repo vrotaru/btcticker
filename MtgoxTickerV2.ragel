@@ -1,0 +1,99 @@
+// Generated using:
+// ragel -J -o src/com/appspot/btcticker/fsm/MtgoxTickerV2.java MtgoxTickerV2.ragel
+//
+
+package com.appspot.btcticker.fsm;
+
+import com.appspot.btcticker.model.Valuation;
+
+public class MtgoxTickerV2 {
+
+	public static final String URL_V2 = "https://data.mtgox.com/api/2/BTCUSD/money/ticker";
+	
+%%{
+	machine ticker;
+	write data;
+
+	action log { System.out.println(json.substring(p - 8, p)); System.out.println(json.substring(p, p + 8)); }
+
+	action set_last { last = i + f; }
+	action set_buy  { buy  = i + f; }
+	action set_sell { sell = i + f; }
+	
+	action mark { mark = p; }
+
+    action clear { i = 0; f = 0.0; scale = 1.0; }
+    action ipart { i = i * 10 + (int)data[p] - zero; }
+    action fpart { scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
+
+    number  = digit+ >clear $ipart ('.' digit+ $fpart)?
+            ;
+	
+	fval     = '"value":"'
+	         ;
+	other    = ( '"' (alpha | '_')+ '":"' ) - fval
+	         ;
+	         
+	vitem    = fval number '"'
+	         | other (any - '"')* '"'
+	         ;
+	         
+	value    = '{' vitem (',' vitem)* '}'
+	         ;
+
+	last     = '"last":' ;
+	buy      = '"buy":' ;
+	sell     = '"sell":' ;
+	
+	pick     = last value @{ last = i + f; } 
+	         | buy  value @{ buy  = i + f; }
+	         | sell value @{ sell = i + f; }
+	         ;
+	
+	skip     = '"' (alpha | '_')+ '":' - ( last | buy | sell )
+	         ;
+	
+	item     = ( pick | skip ( '"' (any - '"')+ '"' | value ) )
+	         ;
+	
+	data     = '{' item (',' item)+ '}'
+	         ;
+	         
+	main     := '{"result":"success","data":'
+	            data
+	            '}'
+	         ;
+	
+		 
+}%%	
+
+	public static Valuation parse (String json) 
+	{
+		char[] data = json.toCharArray();
+		
+		int cs = 0;
+		int p = 0;
+		int pe = data.length;
+		
+		int zero = (int) '0';
+		long i = 0;
+		double f = 0.0;
+		double scale = 1.0;
+        
+        double last = 0;
+        double buy = 0;
+        double sell = 0;
+		
+		%% write init;
+		%% write exec;
+		
+		if (cs < ticker_first_final) {
+            return null;
+        }
+        else {
+        	Valuation v = new Valuation(buy, sell, last);
+        	
+        	return v;
+        }
+	}
+}

@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.appspot.btcticker.enums.Currency;
 import com.appspot.btcticker.fsm.GoogleCurrencyCalculator;
-import com.appspot.btcticker.fsm.MtgoxTickerV0;
+import com.appspot.btcticker.fsm.MtgoxTickerV2;
 import com.appspot.btcticker.fsm.PathQuery;
+import com.appspot.btcticker.model.Valuation;
 import com.google.appengine.api.images.Composite;
 import com.google.appengine.api.images.Composite.Anchor;
 import com.google.appengine.api.images.Image;
@@ -151,8 +152,7 @@ public class BtctickerServlet extends HttpServlet {
 		// Reset imageCache
 		imageCache.clearAll();
 
-		MtgoxTickerV0 tickerV0 = new MtgoxTickerV0();
-		URL url = new URL(MtgoxTickerV0.URL_V0);
+		URL url = new URL(MtgoxTickerV2.URL_V2);
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 		String response = reader.readLine();
@@ -161,7 +161,11 @@ public class BtctickerServlet extends HttpServlet {
 
 		// update timestamp
 		btcTimestamp = System.currentTimeMillis();
-		btcRate = tickerV0.weightedValue(response);
+		Valuation valuation = MtgoxTickerV2.parse(response);
+		if (valuation == null) {
+			throw new RuntimeException("failed to parse: " + response);
+		}
+		btcRate = valuation.weightedValue();
 	}
 
 	private boolean upToDate(Currency currency) {
