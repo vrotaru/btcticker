@@ -30,7 +30,7 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 @SuppressWarnings("serial")
-public class BtctickerServlet extends HttpServlet {
+public class MtGoxServlet extends HttpServlet {
 
 	private static final long BG_COLOR = 0x80E5E5E5L;
 	private static final int MAX_W = 200;
