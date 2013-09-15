@@ -1,0 +1,98 @@
+// Generated using:
+// ragel -J -o src/com/appspot/btcticker/fsm/BtcETickerV2.java BtcETickerV2.ragel
+//
+
+package com.appspot.btcticker.fsm;
+
+import com.appspot.btcticker.model.Valuation;
+
+/*
+{"ticker":
+	{"high":97.98
+	,"low":93.95
+	,"avg":95.965
+	,"vol":440958.41992
+	,"vol_cur":4588.39126
+	,"last":97.979
+	,"buy":97.979
+	,"sell":97.954
+	,"updated":1376501899
+	,"server_time":1376501899
+	}
+}
+*/
+public class BtcETickerV2 {
+
+	public static final String URL_V2 = "https://btc-e.com/api/2/btc_usd/ticker";
+	
+%%{
+	machine ticker;
+	write data;
+
+	action log { System.out.println(json.substring(p - 8, p)); System.out.println(json.substring(p, p + 8)); }
+
+	action set_last { last = i + f; }
+	action set_buy  { buy  = i + f; }
+	action set_sell { sell = i + f; }
+	
+	action mark { mark = p; }
+
+    action clear { i = 0; f = 0.0; scale = 1.0; }
+    action ipart { i = i * 10 + (int)data[p] - zero; }
+    action fpart { scale = scale * 0.1; f = f + scale * ((int)data[p] - zero); }
+
+    number   = digit+ >clear $ipart ('.' digit+ $fpart)?
+             ;
+    
+    last     = '"last":' ;
+	buy      = '"buy":' ;
+	sell     = '"sell":' ;	
+	
+	skip     = '"' (alpha | '_')+ '":' - ( last | buy | sell )
+	         ;
+	
+	item     = skip number
+	         | last number @{ last = i + f; }
+	         | buy  number @{ buy  = i + f; }
+	         | sell number @{ sell = i + f; }
+	         ;
+	         
+   data      = '{' item (',' item)+ '}'
+             ;
+	
+	main     := '{"ticker":'
+	            data
+	            '}'
+	         ;
+}%%	
+
+	public static Valuation parse (String json) 
+	{
+		char[] data = json.toCharArray();
+		
+		int cs = 0;
+		int p = 0;
+		int pe = data.length;
+		
+		int zero = (int) '0';
+		long i = 0;
+		double f = 0.0;
+		double scale = 1.0;
+        
+        double last = 0;
+        double buy = 0;
+        double sell = 0;
+		
+		%% write init;
+		%% write exec;
+		
+		if (cs < ticker_first_final) {
+            return null;
+        }
+        else {
+        	Valuation v = new Valuation(buy, sell, last);
+        	
+        	return v;
+        }
+	}
+}

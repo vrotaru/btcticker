@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.appspot.btcticker.enums.Currency;
-import com.appspot.btcticker.fsm.MtgoxTickerV2;
+import com.appspot.btcticker.fsm.BtcETickerV2;
 import com.appspot.btcticker.model.Valuation;
 
 @SuppressWarnings("serial")
-public class MtGoxServlet extends TickerServlet {
+public class BtcEServlet extends TickerServlet {
 
     protected void updateBitcoinValue() throws IOException {
         if (upToDate(Currency.BITCOIN)) {
@@ -19,7 +19,7 @@ public class MtGoxServlet extends TickerServlet {
         // Reset imageCache
         imageCache.clearAll();
 
-        URL url = new URL(MtgoxTickerV2.URL_V2);
+        URL url = new URL(BtcETickerV2.URL_V2);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 url.openStream()));
@@ -29,7 +29,7 @@ public class MtGoxServlet extends TickerServlet {
 
         // update timestamp
         btcTimestamp = System.currentTimeMillis();
-        Valuation valuation = MtgoxTickerV2.parse(response);
+        Valuation valuation = BtcETickerV2.parse(response);
         if (valuation == null) {
             throw new RuntimeException("failed to parse: " + response);
         }
@@ -37,5 +37,4 @@ public class MtGoxServlet extends TickerServlet {
         buyRate = valuation.buy;
         sellRate = valuation.sell;
     }
-
 }
